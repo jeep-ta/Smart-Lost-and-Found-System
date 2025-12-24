@@ -1,0 +1,5 @@
+    
+    // Public method for GUI to load data
+    public void loadData() {
+        loadItemsFromFile();
+    }
