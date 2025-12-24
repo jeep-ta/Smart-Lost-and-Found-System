@@ -1,0 +1,240 @@
+<?import javafx.scene.image.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<BorderPane xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.example.lostandfound.LostAndFoundController"
+            style="-fx-background-color: linear-gradient(to bottom right, #020617, #1e293b);
+                   -fx-font-family: 'Segoe UI', 'Roboto', sans-serif;">
+
+    <!-- ================= HEADER ================= -->
+    <top>
+        <VBox>
+
+            <!-- Title Bar -->
+            <HBox alignment="CENTER_LEFT" spacing="15"
+                  style="-fx-padding: 22 30;
+                         -fx-background-color: #020617;
+                         -fx-border-color: #1e293b;
+                         -fx-border-width: 0 0 1 0;">
+                
+                <ImageView fitHeight="45" preserveRatio="true">
+                    <Image url="@logo.png"/>
+                </ImageView>
+
+                <Label text="Lost and Found System"
+                       style="-fx-text-fill: #f8fafc;
+                              -fx-font-size: 24px;
+                              -fx-font-weight: bold;"/>
+                <Region HBox.hgrow="ALWAYS"/>
+                <Label text="Academic Project"
+                       style="-fx-text-fill: #94a3b8;
+                              -fx-font-size: 13px;"/>
+            </HBox>
+
+            <!-- Navigation -->
+            <HBox style="-fx-background-color: #0f172a;">
+                <Button fx:id="submitTab" text="📝 Submit"
+                        onAction="#handleSubmitFoundItem"
+                        style="-fx-background-color: #2563eb;
+                               -fx-text-fill: white;
+                               -fx-font-weight: bold;
+                               -fx-padding: 14 24;
+                               -fx-background-radius: 0;
+                               -fx-cursor: hand;">
+                    <tooltip>
+                        <Tooltip text="Submit a newly found item"/>
+                    </tooltip>
+                </Button>
+
+                <Button fx:id="searchTab" text="🔍 Search"
+                        onAction="#handleSearchLostItem"
+                        style="-fx-background-color: #059669;
+                               -fx-text-fill: white;
+                               -fx-font-weight: bold;
+                               -fx-padding: 14 24;
+                               -fx-background-radius: 0;
+                               -fx-cursor: hand;">
+                    <tooltip>
+                        <Tooltip text="Search for a lost item"/>
+                    </tooltip>
+                </Button>
+
+                <Button fx:id="listTab" text="📋 List"
+                        onAction="#handleListFoundItems"
+                        style="-fx-background-color: #7c3aed;
+                               -fx-text-fill: white;
+                               -fx-font-weight: bold;
+                               -fx-padding: 14 24;
+                               -fx-background-radius: 0;
+                               -fx-cursor: hand;">
+                    <tooltip>
+                        <Tooltip text="View all found items"/>
+                    </tooltip>
+                </Button>
+
+                <Button fx:id="removeTab" text="🗑 Remove"
+                        onAction="#handleRemoveItem"
+                        style="-fx-background-color: #dc2626;
+                               -fx-text-fill: white;
+                               -fx-font-weight: bold;
+                               -fx-padding: 14 24;
+                               -fx-background-radius: 0;
+                               -fx-cursor: hand;">
+                    <tooltip>
+                        <Tooltip text="Remove an item"/>
+                    </tooltip>
+                </Button>
+
+                <Button fx:id="criteriaTab" text="📖 Criteria"
+                        onAction="#handleViewCriteria"
+                        style="-fx-background-color: #d97706;
+                               -fx-text-fill: white;
+                               -fx-font-weight: bold;
+                               -fx-padding: 14 24;
+                               -fx-background-radius: 0;
+                               -fx-cursor: hand;">
+                    <tooltip>
+                        <Tooltip text="View item qualification rules"/>
+                    </tooltip>
+                </Button>
+            </HBox>
+        </VBox>
+    </top>
+
+    <!-- ================= CENTER ================= -->
+    <center>
+        <HBox spacing="30">
+            <padding>
+                <Insets top="30" bottom="30" left="30" right="30"/>
+            </padding>
+
+            <!-- ==== SIDEBAR ==== -->
+            <VBox spacing="20" prefWidth="300"
+                  style="-fx-background-color: #020617;
+                         -fx-background-radius: 18;
+                         -fx-padding: 25;
+                         -fx-border-color: #1e293b;
+                         -fx-border-radius: 18;">
+
+                <Label text="📊 Quick Statistics"
+                       style="-fx-text-fill: #f8fafc;
+                              -fx-font-size: 18px;
+                              -fx-font-weight: bold;"/>
+
+                <Separator/>
+
+                <VBox spacing="14">
+                    <VBox style="-fx-background-color: #0ea5e9;
+                                 -fx-padding: 14;
+                                 -fx-background-radius: 12;">
+                        <Label text="Active Items"
+                               style="-fx-text-fill: white;
+                                      -fx-font-weight: bold;"/>
+                        <Label fx:id="activeItemsCount"
+                               text="0 items"
+                               style="-fx-text-fill: #e0f2fe;
+                                      -fx-font-size: 16px;"/>
+                    </VBox>
+
+                    <VBox style="-fx-background-color: #22c55e;
+                                 -fx-padding: 14;
+                                 -fx-background-radius: 12;">
+                        <Label text="Added Today"
+                               style="-fx-text-fill: white;
+                                      -fx-font-weight: bold;"/>
+                        <Label fx:id="todayItemsCount"
+                               text="0 today"
+                               style="-fx-text-fill: #dcfce7;
+                                      -fx-font-size: 16px;"/>
+                    </VBox>
+
+                    <VBox style="-fx-background-color: #facc15;
+                                 -fx-padding: 14;
+                                 -fx-background-radius: 12;">
+                        <Label text="Pending Claims"
+                               style="-fx-text-fill: #1e293b;
+                                      -fx-font-weight: bold;"/>
+                        <Label fx:id="pendingItemsCount"
+                               text="0 items"
+                               style="-fx-text-fill: #1e293b;
+                                      -fx-font-size: 16px;"/>
+                    </VBox>
+                </VBox>
+            </VBox>
+
+            <!-- ==== MAIN PANEL ==== -->
+            <VBox spacing="25" HBox.hgrow="ALWAYS">
+
+                <!-- Overview -->
+                <VBox spacing="10"
+                      style="-fx-background-color: #020617;
+                             -fx-padding: 25;
+                             -fx-background-radius: 18;
+                             -fx-border-color: #1e293b;
+                             -fx-border-radius: 18;">
+                    <Label text="🎯 System Overview"
+                           style="-fx-text-fill: #f8fafc;
+                                  -fx-font-size: 20px;
+                                  -fx-font-weight: bold;"/>
+                    <Label wrapText="true"
+                           text="This Lost and Found System manages item records using efficient data structures and similarity-based matching to ensure accurate retrieval."
+                           style="-fx-text-fill: #94a3b8;
+                                  -fx-font-size: 14px;"/>
+                </VBox>
+
+                <!-- Activity Log -->
+                <VBox spacing="12"
+                      style="-fx-background-color: #020617;
+                             -fx-padding: 25;
+                             -fx-background-radius: 18;
+                             -fx-border-color: #1e293b;
+                             -fx-border-radius: 18;">
+                    <HBox>
+                        <Label text="📝 Activity Log"
+                               style="-fx-text-fill: #f8fafc;
+                                      -fx-font-size: 18px;
+                                      -fx-font-weight: bold;"/>
+                        <Region HBox.hgrow="ALWAYS"/>
+                        <Button text="Clear"
+                                onAction="#handleClearLog"
+                                style="-fx-background-color: #dc2626;
+                                       -fx-text-fill: white;
+                                       -fx-font-weight: bold;
+                                       -fx-padding: 6 12;
+                                       -fx-background-radius: 8;
+                                       -fx-cursor: hand;"/>
+                    </HBox>
+
+                    <TextArea fx:id="outputArea"
+                              editable="false"
+                              wrapText="true"
+                              prefRowCount="10"
+                              style="-fx-control-inner-background: #020617;
+                                     -fx-text-fill: #e5e7eb;
+                                     -fx-font-family: 'Consolas';
+                                     -fx-font-size: 13px;
+                                     -fx-border-color: #1e293b;
+                                     -fx-border-radius: 10;
+                                     -fx-padding: 15;"/>
+                </VBox>
+            </VBox>
+        </HBox>
+    </center>
+
+    <!-- ================= FOOTER ================= -->
+    <bottom>
+        <HBox alignment="CENTER"
+              style="-fx-background-color: #020617;
+                     -fx-padding: 12;
+                     -fx-border-color: #1e293b;
+                     -fx-border-width: 1 0 0 0;">
+            <Label text="Lost and Found System © 2025 • JavaFX • Data Structures &amp; Algorithms"
+                   style="-fx-text-fill: #94a3b8;
+                          -fx-font-size: 11px;"/>
+        </HBox>
+    </bottom>
+
+</BorderPane>
